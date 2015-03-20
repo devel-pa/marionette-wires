@@ -21,6 +21,6 @@ gulp.task('less', function() {
 		.pipe($.if(config.debug, $.sourcemaps.write('./')))
     .pipe($.if(!config.debug, $.minifyCss( {keepSpecialComments: 0} )))
 		.pipe(gulp.dest(config.less.dest))
-    .pipe($.if(!config.release, reload({ stream: true })));
-  ;
+    .pipe($.if(!config.release, reload({ stream: true })))
+    ;
 });

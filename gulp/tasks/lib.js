@@ -8,5 +8,6 @@ gulp.task('lib', function() {
 		.pipe($.if(!dist, $.sourcemaps.init({loadMaps: true})))
 		.pipe($.if(dist, $.uglify()))
 		.pipe($.if(!dist, $.sourcemaps.write('./')))
-		.pipe(gulp.dest(config.js.dest));
+		.pipe(gulp.dest(config.js.dest))
+    ;
 });

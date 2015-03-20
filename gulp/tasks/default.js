@@ -14,6 +14,8 @@ gulp.task('banner', function() {
 //  runSequence(['images', 'lib', 'less', 'code', 'html', 'lint', 'test'])
 //});
 
+gulp.task('test', [ 'lint', 'mocha' ]);
+
 gulp.task('build', ['banner', 'clean', 'images', 'lib', 'less', 'scripts', 'html', 'test']);
 
 gulp.task('enableWatch', function() {

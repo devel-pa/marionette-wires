@@ -16,7 +16,7 @@ export default Application.extend({
     this.$body = $(document.body);
     this.layout = new LayoutView();
     this.layout.render();
-
+    this.x = '' + ''
     this.listenTo(routerChannel, {
       'before:enter:route' : this.onBeforeEnterRoute,
       'enter:route'        : this.onEnterRoute,

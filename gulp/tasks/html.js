@@ -6,7 +6,7 @@ var reload = browserSync.reload;
 
 gulp.task('html', function() {
 	// preprocess for ifdefs
-	gulp.src(config.html.src)
+	return gulp.src(config.html.src)
     .pipe($.plumber())
 		.pipe($.preprocess({context: {DEV: !config.release, DIST: config.release}}))
 		.pipe(gulp.dest(config.html.dest))

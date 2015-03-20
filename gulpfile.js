@@ -10,11 +10,11 @@
 */
 
 var requireDir = require('require-dir');
-var config = require('./build/config');
+var config = require('./gulp/config');
 
 global.config = config;
 
 process.env.BROWSERIFYSWAP_ENV = 'dist';
 
 // Require all tasks in gulp/tasks, including subfolders
-requireDir('./build/tasks', { recurse: true });
+requireDir('./gulp/tasks', { recurse: true });

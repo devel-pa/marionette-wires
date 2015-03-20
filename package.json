@@ -27,14 +27,12 @@
     "babel": "^4.7.13",
     "babelify": "^5.0.4",
     "bluebird": "^2.9.14",
-    "body-parser": "^1.12.2",
+
     "browser-sync": "^2.3.1",
     "browserify": "^9.0.3",
     "browserify-shim": "^3.8.3",
     "chai": "^2.1.2",
     "chai-jquery": "^2.0.0",
-
-    "express": "^4.12.2",
 
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.1.0",
@@ -55,6 +53,7 @@
     "gulp-if": "~1.2.5",
     "gulp-preprocess": "~1.2.0",
     "gulp-cached": "~1.0.4",
+    "gulp-remember": "0.3.0",
     "gulp-notify": "~2.2.0",
     "gulp-imagemin": "~2.2.1",
     "gulp-concat": "~2.5.2",
@@ -66,10 +65,9 @@
     "run-sequence": "^1.0.2",
 
     "jsdom": "^3.1.2",
-    "jshint-stylish": "^1.0.1",
-    "minimatch": "^2.0.4",
+    "jshint-spiffy-reporter": "0.1.0",
     "mocha": "^2.2.1",
-    "morgan": "^1.5.2",
+
     "pioneer": "^0.11.1",
     "proxyquire": "^1.4.0",
     "request": "^2.53.0",
@@ -78,7 +76,10 @@
     "sinon-chai": "^2.7.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^2.4.0"
+    "merge-stream": "0.1.7",
+    "watchify": "^2.4.0",
+
+    "stubbing": "polst/stubbing"
   },
   "dependencies": {
     "animate.css": "^3.1.1",

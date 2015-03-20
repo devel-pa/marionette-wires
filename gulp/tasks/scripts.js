@@ -11,6 +11,10 @@ var reload = browserSync.reload;
 var handleErrors = require('../util/handleErrors.js');
 var tools = require('../util/tools.js');
 
+var merge        = require('merge-stream');
+
+var spiffy = require('jshint-spiffy-reporter');
+
 gulp.task('scripts', function() {
 	if (config.release) {
     var debug = config.debug;
@@ -22,12 +26,12 @@ gulp.task('scripts', function() {
       .pipe($.if(debug, $.sourcemaps.init({ loadMaps: true })))
       .pipe($.if(debug, $.sourcemaps.write('./')))
 			.pipe($.if(!debug, $.uglify()))
-			.pipe(gulp.dest(config.js.dest));
+			.pipe(gulp.dest(config.js.dest))
+      ;
 
 		stream.on('end', function() {
 			console.log('-->               Done building');
 		});
-    //return stream();
 	}
 	else {
 		tools.merge(
@@ -42,13 +46,10 @@ gulp.task('scripts', function() {
 
 		var bundler = watchify(browserify(config.browserify));
 
-		//bundler = watchify(bundler);
-
-
-
-		function bundle() {
+		function bundle(changedFiles) {
 			console.log('-->               Bundling ' + config.js.destFile + ' started');
-			return bundler.bundle()
+
+			var compileStream = bundler.bundle()
 				.on('error', handleErrors)
 				.pipe(source(config.js.destFile))
 				.pipe(buffer())
@@ -68,6 +69,26 @@ gulp.task('scripts', function() {
 					t += ' '+d.getSeconds()+'s';
 					console.log('-->               Updated ' + config.js.destFile+t);
 				});
+
+      if (changedFiles) {
+        var lintStream = gulp.src(changedFiles)//to add tests
+          .pipe($.plumber())
+          .pipe($.cached('linting'), { optimizeMemory:true } )
+          .pipe($.remember('linting'))
+          .pipe($.jshint())
+          .pipe($.jshint.reporter(spiffy))
+          .on('error', handleErrors)
+          .on('end', function() {
+            // console.log('-->               Done linting');
+          })
+          ;
+
+        return merge(lintStream, compileStream);
+
+      }
+
+      return compileStream;
+
 		}
 
     bundler.on('update', bundle); // on any dep update, runs the bundler
